@@ -61,8 +61,8 @@ fun HikariNavGraph(
 @Composable
 private fun HikariBottomBar(navController: NavHostController, currentRoute: String?) {
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.96f),
-        tonalElevation = 8.dp
+        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
+        tonalElevation = 12.dp
     ) {
         Screen.tabs.forEach { screen ->
             val selected = currentRoute == screen.route

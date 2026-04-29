@@ -207,9 +207,9 @@ fun AnimePosterCard(
     Card(
         onClick = onClick,
         modifier = modifier,
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column {
             Box(
@@ -254,7 +254,7 @@ fun AnimePosterCard(
                     Spacer(Modifier.height(6.dp))
                     LinearProgressIndicator(
                         progress = { it },
-                        modifier = Modifier.fillMaxWidth().height(3.dp).clip(RoundedCornerShape(8.dp)),
+                        modifier = Modifier.fillMaxWidth().height(3.dp).clip(RoundedCornerShape(12.dp)),
                         color = HikariCyan,
                         trackColor = MaterialTheme.colorScheme.surfaceVariant
                     )
@@ -273,8 +273,8 @@ fun SpotlightCard(
     Card(
         onClick = onClick,
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
-        elevation = CardDefaults.cardElevation(5.dp)
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Box(Modifier.fillMaxWidth().height(230.dp)) {
             PosterImage(anime.thumbnailUrl, anime.title, Modifier.fillMaxSize())
@@ -290,7 +290,7 @@ fun SpotlightCard(
             Surface(
                 modifier = Modifier.align(Alignment.BottomStart).padding(start = 14.dp, bottom = 64.dp),
                 color = HikariPink,
-                shape = RoundedCornerShape(5.dp)
+                shape = RoundedCornerShape(8.dp)
             ) {
                 Text("Spotlight", color = Color.White, style = MaterialTheme.typography.labelMedium, modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp))
             }
@@ -318,12 +318,12 @@ fun HorizontalAnimeItem(
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(2.dp)
     ) {
-        Row(Modifier.padding(10.dp), verticalAlignment = Alignment.CenterVertically) {
-            Box(Modifier.size(width = 82.dp, height = 76.dp).clip(RoundedCornerShape(8.dp))) {
+        Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+            Box(Modifier.size(width = 82.dp, height = 76.dp).clip(RoundedCornerShape(12.dp))) {
                 PosterImage(anime.thumbnailUrl, anime.title, Modifier.fillMaxSize())
                 Surface(
                     color = Color.Black.copy(alpha = 0.42f),
@@ -342,7 +342,7 @@ fun HorizontalAnimeItem(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         LinearProgressIndicator(
                             progress = { it },
-                            modifier = Modifier.weight(1f).height(3.dp).clip(RoundedCornerShape(8.dp)),
+                            modifier = Modifier.weight(1f).height(3.dp).clip(RoundedCornerShape(12.dp)),
                             color = HikariCyan,
                             trackColor = MaterialTheme.colorScheme.surfaceVariant
                         )

@@ -60,8 +60,8 @@ fun LibraryScreen(
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(18.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        contentPadding = PaddingValues(24.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         item {
             HikariTopBar(
@@ -75,7 +75,7 @@ fun LibraryScreen(
         if (state.savedShows == 0 && state.recentlyAdded.isEmpty()) {
             item {
                 InfoBanner(
-                    title = "Library syncs from AniGo metadata",
+                    title = "Library syncs from active source metadata",
                     body = "Open a title from Explore and add it here. Entries stay backed by the active source and Room cache.",
                     icon = Icons.Rounded.Bookmark,
                     tint = HikariPurple
@@ -103,7 +103,7 @@ fun LibraryScreen(
         }
         items(state.collections) { (name, count) ->
             Card(
-                shape = RoundedCornerShape(8.dp),
+                shape = RoundedCornerShape(12.dp),
                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface),
                 elevation = CardDefaults.cardElevation(2.dp)
             ) {
@@ -171,12 +171,12 @@ private fun LibraryStat(
     icon: @Composable () -> Unit
 ) {
     Card(
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(2.dp)
     ) {
         Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
-            Surface(color = tint.copy(alpha = 0.16f), shape = RoundedCornerShape(8.dp), modifier = Modifier.size(44.dp)) {
+            Surface(color = tint.copy(alpha = 0.16f), shape = RoundedCornerShape(12.dp), modifier = Modifier.size(44.dp)) {
                 androidx.compose.foundation.layout.Box(contentAlignment = Alignment.Center) { icon() }
             }
             Column(Modifier.weight(1f).padding(start = 12.dp)) {
