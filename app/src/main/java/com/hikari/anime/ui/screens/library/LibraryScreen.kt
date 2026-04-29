@@ -132,7 +132,7 @@ fun LibraryScreen(
                         Text(name, style = MaterialTheme.typography.labelMedium)
                         Text("$count titles", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
-                    IconButton(onClick = {}) { Icon(Icons.Rounded.MoreVert, contentDescription = null) }
+                    IconButton(onClick = {}) { Icon(Icons.Rounded.MoreVert, contentDescription = "More options") }
                 }
             }
         }
