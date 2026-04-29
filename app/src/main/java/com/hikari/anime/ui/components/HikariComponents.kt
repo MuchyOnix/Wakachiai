@@ -353,7 +353,7 @@ fun HorizontalAnimeItem(
             }
             if (trailingMenu) {
                 IconButton(onClick = {}) {
-                    Icon(Icons.Rounded.MoreVert, contentDescription = null)
+                    Icon(Icons.Rounded.MoreVert, contentDescription = "More options")
                 }
             }
         }
