@@ -50,6 +50,7 @@ import androidx.media3.ui.PlayerView
 import androidx.navigation.NavHostController
 import dagger.hilt.android.EntryPointAccessors
 
+@androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 @Composable
 fun PlayerScreen(
     navController: NavHostController,
