@@ -1,4 +1,6 @@
 [versions]
+mockk = "1.13.10"
+coroutinesTest = "1.8.1"
 agp = "8.12.0-alpha06"
 kotlin = "2.0.21"
 coreKtx = "1.18.0"
@@ -22,6 +24,8 @@ serializationJson = "1.7.3"
 paging = "3.3.6"
 
 [libraries]
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
