@@ -61,8 +61,8 @@ fun ExtensionsScreen(
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(18.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        contentPadding = PaddingValues(24.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         item {
             HikariTopBar(
@@ -107,7 +107,7 @@ fun ExtensionsScreen(
         item {
             InfoBanner(
                 title = "Session refresh",
-                body = "Use the source menu to open AniGo in WebView when cookies or Cloudflare checks need to be refreshed for OkHttp.",
+                body = "Use the source menu to open the active source in WebView when cookies or Cloudflare checks need to be refreshed for OkHttp.",
                 icon = Icons.Rounded.CloudQueue,
                 tint = HikariCyan
             )
@@ -117,7 +117,7 @@ fun ExtensionsScreen(
 
 @Composable
 private fun ExtensionHero() {
-    Card(shape = RoundedCornerShape(8.dp), elevation = CardDefaults.cardElevation(2.dp)) {
+    Card(shape = RoundedCornerShape(12.dp), elevation = CardDefaults.cardElevation(2.dp)) {
         Row(
             Modifier
                 .fillMaxWidth()
@@ -128,9 +128,9 @@ private fun ExtensionHero() {
             Column(Modifier.weight(1f)) {
                 Text("Manage active anime source", style = MaterialTheme.typography.labelMedium)
                 Spacer(Modifier.height(6.dp))
-                Text("AniGo.to is the active compiled source for the MVP architecture.", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Manage your active compiled source for the MVP architecture.", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            Surface(color = HikariPurple, shape = RoundedCornerShape(8.dp), modifier = Modifier.size(70.dp)) {
+            Surface(color = HikariPurple, shape = RoundedCornerShape(12.dp), modifier = Modifier.size(70.dp)) {
                 Box(contentAlignment = Alignment.Center) {
                     Icon(Icons.Rounded.Extension, contentDescription = null, tint = Color.White, modifier = Modifier.size(34.dp))
                 }
@@ -146,9 +146,9 @@ private fun SourceItem(
     onActivate: () -> Unit,
     onRefreshSession: () -> Unit
 ) {
-    Card(shape = RoundedCornerShape(8.dp), elevation = CardDefaults.cardElevation(2.dp)) {
+    Card(shape = RoundedCornerShape(12.dp), elevation = CardDefaults.cardElevation(2.dp)) {
         Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Surface(color = HikariPurple, shape = RoundedCornerShape(8.dp), modifier = Modifier.size(46.dp)) {
+            Surface(color = HikariPurple, shape = RoundedCornerShape(12.dp), modifier = Modifier.size(46.dp)) {
                 Box(contentAlignment = Alignment.Center) {
                     Icon(Icons.Rounded.CloudQueue, contentDescription = null, tint = Color.White)
                 }
@@ -165,9 +165,9 @@ private fun SourceItem(
 
 @Composable
 private fun UpdateItem(name: String, version: String, tint: Color) {
-    Card(shape = RoundedCornerShape(8.dp), elevation = CardDefaults.cardElevation(2.dp)) {
+    Card(shape = RoundedCornerShape(12.dp), elevation = CardDefaults.cardElevation(2.dp)) {
         Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Surface(color = tint, shape = RoundedCornerShape(8.dp), modifier = Modifier.size(46.dp)) {
+            Surface(color = tint, shape = RoundedCornerShape(12.dp), modifier = Modifier.size(46.dp)) {
                 Box(contentAlignment = Alignment.Center) {
                     Icon(Icons.Rounded.Update, contentDescription = null, tint = Color.White)
                 }

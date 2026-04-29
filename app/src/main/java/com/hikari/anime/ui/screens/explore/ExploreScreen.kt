@@ -66,9 +66,9 @@ fun ExploreScreen(
     LazyVerticalGrid(
         columns = GridCells.Adaptive(104.dp),
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(18.dp),
-        verticalArrangement = Arrangement.spacedBy(14.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        contentPadding = PaddingValues(24.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item(span = { GridItemSpan(maxLineSpan) }) {
             Column {
@@ -93,12 +93,10 @@ fun ExploreScreen(
                         }
                     },
                     singleLine = true,
-                    shape = RoundedCornerShape(50),
+                    shape = RoundedCornerShape(12.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color.Transparent,
-                        unfocusedBorderColor = Color.Transparent,
-                        focusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
-                        unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant
+                        focusedContainerColor = MaterialTheme.colorScheme.surface,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.surface
                     ),
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -116,9 +114,9 @@ fun ExploreScreen(
 
         item(span = { GridItemSpan(maxLineSpan) }) {
             Column {
-                HomeSourceBanner(count = uiState.animes.size + uiState.latestUpdates.size)
+                HomeSourceBanner(sourceName = uiState.activeSourceName, count = uiState.animes.size + uiState.latestUpdates.size)
                 Spacer(Modifier.height(14.dp))
-                SectionHeader("Filters", action = "AniGo")
+                SectionHeader("Filters", action = uiState.activeSourceName)
                 Spacer(Modifier.height(8.dp))
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     item { GenreChip("All", MaterialTheme.colorScheme.onSurfaceVariant, uiState.selectedGenre == null && uiState.selectedType == null && uiState.selectedStatus == null) { vm.onGenreSelected(null); vm.onTypeSelected(null); vm.onStatusSelected(null) } }
@@ -174,7 +172,7 @@ fun ExploreScreen(
         }
 
         if (uiState.latestUpdates.isNotEmpty()) {
-            item(span = { GridItemSpan(maxLineSpan) }) { SectionHeader("Latest From AniGo") }
+            item(span = { GridItemSpan(maxLineSpan) }) { SectionHeader("Latest From ${uiState.activeSourceName}") }
             items(uiState.latestUpdates.take(3), key = { "latest-${it.url}" }) { anime ->
                 AnimePosterCard(
                     anime = anime,
@@ -200,7 +198,7 @@ fun ExploreScreen(
             item(span = { GridItemSpan(maxLineSpan) }) {
                 EmptyState(
                     title = "No source results",
-                    body = "AniGo did not return items for the current search or filter set.",
+                    body = "${uiState.activeSourceName} did not return items for the current search or filter set.",
                     tint = HikariPurple,
                     actionLabel = "Retry",
                     onAction = vm::retry
@@ -231,7 +229,7 @@ fun ExploreScreen(
 }
 
 @Composable
-private fun HomeSourceBanner(count: Int) {
+private fun HomeSourceBanner(sourceName: String, count: Int) {
     Surface(shape = RoundedCornerShape(8.dp), color = MaterialTheme.colorScheme.surface) {
         Row(
             modifier = Modifier
@@ -242,8 +240,8 @@ private fun HomeSourceBanner(count: Int) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
-                Text("AniGo Home", style = MaterialTheme.typography.titleMedium)
-                Text("Live catalog sections from anigo.to/home", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("${sourceName} Home", style = MaterialTheme.typography.titleMedium)
+                Text("Live catalog sections from ${sourceName.lowercase()}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             Surface(color = HikariPurple, shape = RoundedCornerShape(50)) {
                 Text("$count", color = Color.White, style = MaterialTheme.typography.labelMedium, modifier = Modifier.padding(horizontal = 12.dp, vertical = 7.dp))

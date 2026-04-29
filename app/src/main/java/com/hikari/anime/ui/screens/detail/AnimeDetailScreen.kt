@@ -159,7 +159,7 @@ fun AnimeDetailScreen(
             item {
                 EmptyState(
                     title = "Episodes are not available yet",
-                    body = "AniGo renders some episode lists through client-side source scripts. Public detail metadata is cached now; episodes will appear here when the source exposes them.",
+                    body = "The active source renders some episode lists through client-side source scripts. Public detail metadata is cached now; episodes will appear here when the source exposes them.",
                     icon = Icons.Rounded.PlayArrow,
                     tint = HikariPurple,
                     modifier = Modifier.padding(horizontal = 18.dp, vertical = 8.dp)

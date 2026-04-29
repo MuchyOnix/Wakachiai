@@ -10,6 +10,7 @@ import com.hikari.anime.domain.model.HistoryEntry
 import com.hikari.anime.domain.usecase.GetLatestUpdatesUseCase
 import com.hikari.anime.domain.usecase.GetPopularAnimeUseCase
 import com.hikari.anime.domain.usecase.SearchAnimeUseCase
+import com.hikari.anime.extension.ExtensionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -20,6 +21,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class ExploreUiState(
+    val activeSourceName: String = "",
     val searchQuery: String = "",
     val animes: List<Anime> = emptyList(),
     val latestUpdates: List<Anime> = emptyList(),
@@ -50,6 +52,7 @@ data class ExploreUiState(
 
 @HiltViewModel
 class ExploreViewModel @Inject constructor(
+    private val extensionManager: ExtensionManager,
     private val getPopularAnime: GetPopularAnimeUseCase,
     private val searchAnime: SearchAnimeUseCase,
     private val getLatestUpdates: GetLatestUpdatesUseCase,
@@ -67,6 +70,11 @@ class ExploreViewModel @Inject constructor(
         viewModelScope.launch {
             historyRepository.observeContinueWatching().collect { entries ->
                 _state.update { it.copy(continueWatching = entries) }
+            }
+        }
+        viewModelScope.launch {
+            extensionManager.activeSource.collect { source ->
+                _state.update { it.copy(activeSourceName = source.name) }
             }
         }
     }
