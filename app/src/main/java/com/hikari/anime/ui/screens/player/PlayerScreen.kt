@@ -16,7 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.HighQuality
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.SkipNext
@@ -35,11 +35,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.annotation.OptIn
+import androidx.media3.common.util.UnstableApi
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
@@ -50,6 +52,7 @@ import androidx.media3.ui.PlayerView
 import androidx.navigation.NavHostController
 import dagger.hilt.android.EntryPointAccessors
 
+@OptIn(UnstableApi::class)
 @Composable
 fun PlayerScreen(
     navController: NavHostController,
@@ -107,7 +110,7 @@ fun PlayerScreen(
         ) {
             Surface(color = Color.Black.copy(alpha = 0.45f), shape = androidx.compose.foundation.shape.RoundedCornerShape(50)) {
                 IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(Icons.Rounded.ArrowBack, contentDescription = "Back", tint = Color.White)
+                    Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back", tint = Color.White)
                 }
             }
             Text(state.episodeName, color = Color.White, style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(start = 10.dp))
