@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -117,22 +118,23 @@ fun ExtensionsScreen(
 
 @Composable
 private fun ExtensionHero() {
-    Card(shape = RoundedCornerShape(8.dp), elevation = CardDefaults.cardElevation(2.dp)) {
+    Card(shape = RoundedCornerShape(12.dp), elevation = CardDefaults.cardElevation(2.dp)) {
         Row(
             Modifier
                 .fillMaxWidth()
                 .background(Brush.linearGradient(listOf(HikariPurple.copy(alpha = 0.18f), HikariCyan.copy(alpha = 0.10f))))
-                .padding(16.dp),
+                .padding(18.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(Modifier.weight(1f)) {
-                Text("Manage active anime source", style = MaterialTheme.typography.labelMedium)
-                Spacer(Modifier.height(6.dp))
-                Text("AniGo.to is the active compiled source for the MVP architecture.", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Manage active anime source", style = MaterialTheme.typography.titleMedium)
+                Spacer(Modifier.height(8.dp))
+                Text("AniGo.to is the active compiled source for the MVP architecture.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            Surface(color = HikariPurple, shape = RoundedCornerShape(8.dp), modifier = Modifier.size(70.dp)) {
+            Spacer(Modifier.width(16.dp))
+            Surface(color = HikariPurple, shape = RoundedCornerShape(12.dp), modifier = Modifier.size(72.dp)) {
                 Box(contentAlignment = Alignment.Center) {
-                    Icon(Icons.Rounded.Extension, contentDescription = null, tint = Color.White, modifier = Modifier.size(34.dp))
+                    Icon(Icons.Rounded.Extension, contentDescription = null, tint = Color.White, modifier = Modifier.size(36.dp))
                 }
             }
         }
@@ -146,16 +148,17 @@ private fun SourceItem(
     onActivate: () -> Unit,
     onRefreshSession: () -> Unit
 ) {
-    Card(shape = RoundedCornerShape(8.dp), elevation = CardDefaults.cardElevation(2.dp)) {
-        Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Surface(color = HikariPurple, shape = RoundedCornerShape(8.dp), modifier = Modifier.size(46.dp)) {
+    Card(shape = RoundedCornerShape(12.dp), elevation = CardDefaults.cardElevation(2.dp)) {
+        Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Surface(color = HikariPurple, shape = RoundedCornerShape(10.dp), modifier = Modifier.size(52.dp)) {
                 Box(contentAlignment = Alignment.Center) {
-                    Icon(Icons.Rounded.CloudQueue, contentDescription = null, tint = Color.White)
+                    Icon(Icons.Rounded.CloudQueue, contentDescription = null, tint = Color.White, modifier = Modifier.size(26.dp))
                 }
             }
-            Column(Modifier.weight(1f).padding(start = 12.dp)) {
-                Text(source.name, style = MaterialTheme.typography.labelMedium)
-                Text("v1.0.0  ${source.lang.uppercase()}  Source", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Column(Modifier.weight(1f).padding(start = 16.dp)) {
+                Text(source.name, style = MaterialTheme.typography.titleMedium)
+                Spacer(Modifier.height(4.dp))
+                Text("v1.0.0  ${source.lang.uppercase()}  Source", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             Switch(checked = isActive, onCheckedChange = { onActivate() })
             IconButton(onClick = onRefreshSession) { Icon(Icons.Rounded.MoreVert, contentDescription = "Refresh source session") }
