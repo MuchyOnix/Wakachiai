@@ -63,11 +63,14 @@ fun PlayerScreen(
         ).okHttpClient()
     }
     val player = remember {
+        @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
         val httpDataSourceFactory = OkHttpDataSource.Factory(okHttpClient)
             .setDefaultRequestProperties(mapOf("Referer" to "https://anigo.to/"))
-        ExoPlayer.Builder(context)
+        @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
+        val exoPlayer = ExoPlayer.Builder(context)
             .setMediaSourceFactory(DefaultMediaSourceFactory(httpDataSourceFactory))
             .build()
+        exoPlayer
     }
     val state by vm.state.collectAsStateWithLifecycle()
 
