@@ -52,7 +52,8 @@ fun SEpisode.toEntity(animeUrl: String) = EpisodeEntity(
     dateUpload = dateUpload,
     seen = false,
     progress = 0L,
-    totalDuration = 24L * 60L * 1000L
+    totalDuration = 24L * 60L * 1000L,
+    isDub = isDub
 )
 
 fun EpisodeEntity.toDomain() = Episode(
@@ -63,7 +64,8 @@ fun EpisodeEntity.toDomain() = Episode(
     dateUpload = dateUpload,
     seen = seen,
     progress = progress,
-    totalDuration = totalDuration
+    totalDuration = totalDuration,
+    isDub = isDub
 )
 
 fun HistoryWithAnime.toDomain() = HistoryEntry(

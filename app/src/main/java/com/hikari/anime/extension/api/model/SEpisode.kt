@@ -5,5 +5,6 @@ data class SEpisode(
     var name: String = "",
     var episodeNumber: Float = -1f,
     var dateUpload: Long = 0L,
-    var scanlator: String? = null
+    var scanlator: String? = null,
+    var isDub: Boolean = false
 )
