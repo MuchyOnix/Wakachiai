@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -64,27 +65,32 @@ fun AnimeDetailScreen(
         contentPadding = PaddingValues(bottom = 22.dp)
     ) {
         item {
-            Box(Modifier.fillMaxWidth().height(330.dp)) {
+            Box(Modifier.fillMaxWidth().height(380.dp)) {
                 PosterImage(anime?.thumbnailUrl, anime?.title ?: "Anime", Modifier.fillMaxSize())
                 Box(
                     Modifier.matchParentSize().background(
-                        Brush.verticalGradient(listOf(Color.Black.copy(alpha = 0.12f), MaterialTheme.colorScheme.background))
+                        Brush.verticalGradient(
+                            colors = listOf(Color.Transparent, MaterialTheme.colorScheme.background.copy(alpha = 0.8f), MaterialTheme.colorScheme.background),
+                            startY = 0f
+                        )
                     )
                 )
                 IconButton(
                     onClick = { navController.popBackStack() },
-                    modifier = Modifier.align(Alignment.TopStart).padding(16.dp)
+                    modifier = Modifier.align(Alignment.TopStart).padding(16.dp).background(Color.Black.copy(alpha = 0.4f), RoundedCornerShape(50))
                 ) {
                     Icon(Icons.Rounded.ArrowBack, contentDescription = "Back", tint = Color.White)
                 }
-                Column(Modifier.align(Alignment.BottomStart).padding(18.dp)) {
+                Column(Modifier.align(Alignment.BottomStart).padding(20.dp)) {
                     Text(anime?.title ?: "Loading", style = MaterialTheme.typography.headlineLarge)
+                    Spacer(Modifier.height(4.dp))
                     if (!anime?.genre.isNullOrBlank()) {
-                        Text(anime?.genre.orEmpty(), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text(anime?.genre.orEmpty(), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis)
                     }
-                    Spacer(Modifier.height(12.dp))
-                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Spacer(Modifier.height(16.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         Button(
+                            modifier = Modifier.weight(1f).height(50.dp),
                             enabled = state.episodes.isNotEmpty(),
                             onClick = {
                                 val first = state.episodes.firstOrNull()
@@ -92,14 +98,17 @@ fun AnimeDetailScreen(
                             }
                         ) {
                             Icon(Icons.Rounded.PlayArrow, contentDescription = null)
-                            Text("Play")
+                            Spacer(Modifier.width(8.dp))
+                            Text("Play First Episode")
                         }
-                        OutlinedButton(onClick = vm::toggleLibrary) {
+                        OutlinedButton(
+                            modifier = Modifier.height(50.dp),
+                            onClick = vm::toggleLibrary
+                        ) {
                             Icon(
                                 if (state.isInLibrary) Icons.Rounded.BookmarkRemove else Icons.Rounded.BookmarkAdd,
                                 contentDescription = null
                             )
-                            Text(if (state.isInLibrary) "Remove" else "Library")
                         }
                     }
                 }
@@ -169,21 +178,30 @@ fun AnimeDetailScreen(
         items(state.episodes, key = { it.url }) { episode ->
             Card(
                 modifier = Modifier.padding(horizontal = 18.dp, vertical = 6.dp),
-                shape = RoundedCornerShape(8.dp),
+                shape = RoundedCornerShape(12.dp),
                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface),
                 elevation = CardDefaults.cardElevation(2.dp),
                 onClick = { navController.navigate(Screen.playerRoute(episode.url, state.animeUrl)) }
             ) {
-                Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                     Box(
-                        Modifier.size(48.dp).clip(RoundedCornerShape(8.dp)).background(HikariPurple.copy(alpha = 0.14f)),
+                        Modifier.size(56.dp).clip(RoundedCornerShape(12.dp)).background(HikariPurple.copy(alpha = 0.1f)),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(Icons.Rounded.PlayArrow, contentDescription = null, tint = HikariPurple)
                     }
-                    Column(Modifier.weight(1f).padding(start = 12.dp)) {
-                        Text(episode.name, style = MaterialTheme.typography.labelMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                        Text("Episode ${episode.episodeNumber.toInt()}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Column(Modifier.weight(1f).padding(start = 16.dp)) {
+                        Text(episode.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Spacer(Modifier.height(4.dp))
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text("Episode ${episode.episodeNumber.toInt()}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            if (episode.isDub) {
+                                Spacer(Modifier.width(8.dp))
+                                androidx.compose.material3.Surface(color = HikariPink.copy(alpha = 0.15f), shape = RoundedCornerShape(4.dp)) {
+                                    Text("DUB", color = HikariPink, style = MaterialTheme.typography.labelMedium, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
+                                }
+                            }
+                        }
                     }
                 }
             }

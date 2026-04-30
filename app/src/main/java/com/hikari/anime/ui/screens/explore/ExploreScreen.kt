@@ -116,11 +116,12 @@ fun ExploreScreen(
 
         item(span = { GridItemSpan(maxLineSpan) }) {
             Column {
-                HomeSourceBanner(count = uiState.animes.size + uiState.latestUpdates.size)
                 Spacer(Modifier.height(14.dp))
-                SectionHeader("Filters", action = "AniGo")
-                Spacer(Modifier.height(8.dp))
-                LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                HomeSourceBanner(count = uiState.animes.size + uiState.latestUpdates.size)
+                Spacer(Modifier.height(18.dp))
+                SectionHeader("Explore Categories", action = "")
+                Spacer(Modifier.height(12.dp))
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     item { GenreChip("All", MaterialTheme.colorScheme.onSurfaceVariant, uiState.selectedGenre == null && uiState.selectedType == null && uiState.selectedStatus == null) { vm.onGenreSelected(null); vm.onTypeSelected(null); vm.onStatusSelected(null) } }
                     item { GenreChip("Action", HikariPink, uiState.selectedGenre == "Action") { vm.onGenreSelected(if (uiState.selectedGenre == "Action") null else "Action") } }
                     item { GenreChip("Fantasy", HikariPurple, uiState.selectedGenre == "Fantasy") { vm.onGenreSelected(if (uiState.selectedGenre == "Fantasy") null else "Fantasy") } }
@@ -232,21 +233,22 @@ fun ExploreScreen(
 
 @Composable
 private fun HomeSourceBanner(count: Int) {
-    Surface(shape = RoundedCornerShape(8.dp), color = MaterialTheme.colorScheme.surface) {
+    Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.surface, shadowElevation = 2.dp) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Brush.linearGradient(listOf(HikariPurple.copy(alpha = 0.22f), HikariCyan.copy(alpha = 0.14f))))
-                .padding(14.dp),
+                .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
-                Text("AniGo Home", style = MaterialTheme.typography.titleMedium)
-                Text("Live catalog sections from anigo.to/home", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("AniGo Trending", style = MaterialTheme.typography.titleMedium)
+                Spacer(Modifier.height(2.dp))
+                Text("Live catalog updates from source", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             Surface(color = HikariPurple, shape = RoundedCornerShape(50)) {
-                Text("$count", color = Color.White, style = MaterialTheme.typography.labelMedium, modifier = Modifier.padding(horizontal = 12.dp, vertical = 7.dp))
+                Text("$count items", color = Color.White, style = MaterialTheme.typography.labelMedium, modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp))
             }
         }
     }
