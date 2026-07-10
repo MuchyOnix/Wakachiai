@@ -89,7 +89,8 @@ class PlayerViewModel @Inject constructor(
     }
 
     private suspend fun resolveVideos(episodeUrl: String) {
-        runCatching { getVideoLinks(episodeUrl) }
+        val episode = state.value.episodes.firstOrNull { it.url == episodeUrl }
+        runCatching { getVideoLinks(episodeUrl, episode?.isDub ?: false) }
             .onSuccess { videos ->
                 _state.update {
                     it.copy(

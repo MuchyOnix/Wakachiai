@@ -86,12 +86,13 @@ fun HistoryScreen(
             }
         }
         if (grouped.isNotEmpty()) item {
+            Spacer(Modifier.height(8.dp))
             androidx.compose.material3.Surface(
-                shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
+                shape = androidx.compose.foundation.shape.RoundedCornerShape(12.dp),
                 color = MaterialTheme.colorScheme.surfaceVariant
             ) {
-                Row(Modifier.fillMaxWidth().padding(12.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-                    Text("Showing history from the last 30 days", style = MaterialTheme.typography.labelMedium)
+                Row(Modifier.fillMaxWidth().padding(16.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Text("Showing history from the last 30 days", style = MaterialTheme.typography.bodyMedium)
                     Text("Change", style = MaterialTheme.typography.labelMedium, color = HikariCyan)
                 }
             }

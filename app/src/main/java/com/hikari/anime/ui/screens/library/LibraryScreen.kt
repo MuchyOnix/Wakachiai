@@ -103,12 +103,12 @@ fun LibraryScreen(
         }
         items(state.collections) { (name, count) ->
             Card(
-                shape = RoundedCornerShape(8.dp),
+                shape = RoundedCornerShape(12.dp),
                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface),
                 elevation = CardDefaults.cardElevation(2.dp)
             ) {
-                Row(Modifier.fillMaxWidth().padding(10.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Row(Modifier.size(width = 76.dp, height = 54.dp), horizontalArrangement = Arrangement.spacedBy(3.dp)) {
+                Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Row(Modifier.size(width = 84.dp, height = 64.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                         val preview = state.recentlyAdded.take(2)
                         if (preview.isEmpty()) {
                             repeat(2) {
@@ -128,8 +128,9 @@ fun LibraryScreen(
                             }
                         }
                     }
-                    Column(Modifier.weight(1f).padding(start = 12.dp)) {
-                        Text(name, style = MaterialTheme.typography.labelMedium)
+                    Column(Modifier.weight(1f).padding(start = 16.dp)) {
+                        Text(name, style = MaterialTheme.typography.titleMedium)
+                        Spacer(Modifier.height(4.dp))
                         Text("$count titles", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                     IconButton(onClick = {}) { Icon(Icons.Rounded.MoreVert, contentDescription = null) }
@@ -171,17 +172,18 @@ private fun LibraryStat(
     icon: @Composable () -> Unit
 ) {
     Card(
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(2.dp)
     ) {
-        Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
-            Surface(color = tint.copy(alpha = 0.16f), shape = RoundedCornerShape(8.dp), modifier = Modifier.size(44.dp)) {
+        Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Surface(color = tint.copy(alpha = 0.16f), shape = RoundedCornerShape(10.dp), modifier = Modifier.size(52.dp)) {
                 androidx.compose.foundation.layout.Box(contentAlignment = Alignment.Center) { icon() }
             }
-            Column(Modifier.weight(1f).padding(start = 12.dp)) {
-                Text(title, style = MaterialTheme.typography.labelMedium)
-                Text(subtitle, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Column(Modifier.weight(1f).padding(start = 16.dp)) {
+                Text(title, style = MaterialTheme.typography.titleMedium)
+                Spacer(Modifier.height(4.dp))
+                Text(subtitle, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             Icon(Icons.Rounded.ArrowForwardIos, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.size(16.dp))
         }

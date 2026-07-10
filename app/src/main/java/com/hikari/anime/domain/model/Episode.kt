@@ -8,5 +8,6 @@ data class Episode(
     val dateUpload: Long,
     val seen: Boolean,
     val progress: Long,
-    val totalDuration: Long
+    val totalDuration: Long,
+    val isDub: Boolean = false
 )

@@ -7,5 +7,6 @@ data class Video(
     val quality: String,
     val headers: Headers = Headers.headersOf(),
     val subtitleTracks: List<Track> = emptyList(),
-    val audioTracks: List<Track> = emptyList()
+    val audioTracks: List<Track> = emptyList(),
+    val isDub: Boolean = false
 )
